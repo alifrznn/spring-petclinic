@@ -6,8 +6,16 @@ services:
 
     env_file:
       - .env
+
     ports:
       - "127.0.0.1:5432:5432"
 
     volumes:
       - /opt/petclinic/postgres-data:/var/lib/postgresql/data
+
+    networks:
+      - petclinic-repl
+
+networks:
+  petclinic-repl:
+    external: true

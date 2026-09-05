@@ -1,0 +1,35 @@
+services:
+  postgres-basebackup:
+    image: postgres:16
+    container_name: petclinic-postgres-basebackup
+
+    env_file:
+      - .env
+
+    networks:
+      - petclinic-repl
+
+    volumes:
+      - /opt/petclinic/postgres-replica-data:/var/lib/postgresql/data
+
+    environment:
+      PGPASSWORD: ${REPLICATION_PASSWORD}
+
+    command:
+      - pg_basebackup
+      - -h
+      - petclinic-postgres
+      - -p
+      - "5432"
+      - -U
+      - ${REPLICATION_USER}
+      - -D
+      - /var/lib/postgresql/data
+      - -Fp
+      - -Xs
+      - -P
+      - -R
+
+networks:
+  petclinic-repl:
+    external: true

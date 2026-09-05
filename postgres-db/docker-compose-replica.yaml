@@ -1,0 +1,20 @@
+services:
+  postgres-replica:
+    image: postgres:16
+    container_name: petclinic-postgres-replica
+    restart: unless-stopped
+
+    env_file:
+      - .env
+    ports:
+      - "127.0.0.1:5433:5432"
+
+    volumes:
+      - /opt/petclinic/postgres-replica-data:/var/lib/postgresql/data
+
+    networks:
+      - petclinic-repl
+
+networks:
+  petclinic-repl:
+    external: true
