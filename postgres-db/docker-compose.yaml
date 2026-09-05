@@ -1,0 +1,13 @@
+services:
+  postgres:
+    image: postgres:16
+    container_name: petclinic-postgres
+    restart: unless-stopped
+
+    env_file:
+      - .env
+    ports:
+      - "127.0.0.1:5432:5432"
+
+    volumes:
+      - /opt/petclinic/postgres-data:/var/lib/postgresql/data
