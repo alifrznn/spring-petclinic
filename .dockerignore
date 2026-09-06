@@ -1,0 +1,33 @@
+# Git
+.git
+.gitignore
+.github
+
+# Maven / Gradle build output
+target
+build
+.gradle
+
+# IDE
+.idea
+.vscode
+*.iml
+
+# Local environment / secrets
+.env
+.env.*
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# Documentation
+docs
+
+# PostgreSQL local data
+postgres-db
+
+# Logs
+*.log
+# Docker Compose
+docker-compose.yml
