@@ -1,0 +1,38 @@
+services:
+
+  petclinic:
+    image: petclinic:1.0
+
+    environment:
+      SPRING_PROFILES_ACTIVE: ""
+
+    networks:
+      - petclinic-net
+
+    deploy:
+      replicas: 2
+
+      placement:
+        constraints:
+          - node.labels.app == true
+        max_replicas_per_node: 1
+
+      restart_policy:
+        condition: on-failure
+        delay: 5s
+        max_attempts: 3
+        window: 60s
+
+      resources:
+        limits:
+          cpus: "1.0"
+          memory: 1G
+
+        reservations:
+          cpus: "0.25"
+          memory: 512M
+
+
+networks:
+  petclinic-net:
+    external: true
